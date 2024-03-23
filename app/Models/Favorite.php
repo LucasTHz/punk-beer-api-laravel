@@ -14,16 +14,16 @@ class Favorite extends Model
         'fav_description',
         'fav_name',
         'fav_tag_line',
-        'fav_alcool',
+        'fav_alcohol',
         'fav_amargor',
-        'fav_comidas',
-        'fav_dicas',
+        'fav_food',
+        'fav_tips',
         'fav_img_url',
-        'fav_data_cerveja',
+        'fav_date_beer',
     ];
 
     protected $casts = [
-        'fav_data_cerveja' => 'datetime',
+        'fav_date_beer' => 'datetime',
 
     ];
 }
