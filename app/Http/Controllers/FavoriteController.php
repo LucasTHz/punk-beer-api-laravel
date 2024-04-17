@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTransferObjects\Favorite\FavoriteDTO;
 use App\Http\Requests\StoreFavoriteRequest;
 use App\Http\Requests\UpdateFavoriteRequest;
 use App\Http\Resources\FavoriteResource;
 use App\Models\Favorite;
-use FavoriteDTO;
-use FavoriteService;
+use App\Services\Favorite\FavoriteService;
+use Illuminate\Http\Request;
 
 class FavoriteController extends Controller
 {
@@ -22,15 +23,20 @@ class FavoriteController extends Controller
      */
     public function index()
     {
-        //
+        $auth = auth()->user();
+
+        return response([
+            'favorites' => 'ola mundo'
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreFavoriteRequest $request)
+    public function store(Request $request)
     {
-        $favorite = $this->service->store(FavoriteDTO::fromRequest($request));
+        ds($request->all());
+        $favorite = $this->service->store($request);
 
         return FavoriteResource::make($favorite);
     }
