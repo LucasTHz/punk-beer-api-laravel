@@ -2,26 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\DataTransferObjects\User\UserDTO;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use App\Services\User\UserService;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class UserController extends Controller
 {
-
     public function __construct(
         private UserService $service
     ) {
-    }
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        ds('ola mundo');
     }
 
     /**
@@ -37,21 +29,25 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(User $user)
+    public function show(User $user): Response
     {
-        ds($user);
         return response([
-            'message' => 'User found',
-            'data' => UserResource::make($user)
+            'message' => 'Usuario consultado com sucesso!',
+            'data'    => UserResource::make($user),
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, User $user): Response
     {
-        //
+        $user = $this->service->update($request->all(), $user);
+
+        return response([
+            'message' => 'Usuario atualizado com sucesso!',
+            'data'    => UserResource::make($user),
+        ]);
     }
 
     /**

@@ -6,12 +6,9 @@ use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Contracts\Validation\Validator as ValidationValidator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
-use Illuminate\Validation\Validator;
 
 class StoreUserRequest extends FormRequest
 {
-
-
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -28,34 +25,35 @@ class StoreUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8',
+            'name'                 => 'required|string|max:255',
+            'email'                => 'required|string|email|max:255|unique:users',
+            'password'             => 'required|string|min:8',
             'passwordConfirmation' => 'required|string|same:password',
-            'document' => 'required|string|max:14|unique:users',
-            'dateOfBirth' => 'required|date',
+            'document'             => 'required|string|max:14|unique:users',
+            'dateOfBirth'          => 'required|date',
         ];
     }
 
     public function messages()
     {
         return [
-            "required" => "O campo :attribute é obrigatório.",
-            "string" => "O campo :attribute deve ser uma string.",
-            "email" => "O campo :attribute deve ser um e-mail válido.",
-            "max" => "O campo :attribute deve ter no máximo :max caracteres.",
-            "min" => "O campo :attribute deve ter no mínimo :min caracteres.",
-            "same" => "Os campos :attribute e :other devem ser iguais.",
-            "unique" => "O campo :attribute já está em uso.",
-            "date" => "O campo :attribute deve ser uma data válida."
+            'required' => 'O campo :attribute é obrigatório.',
+            'string'   => 'O campo :attribute deve ser uma string.',
+            'email'    => 'O campo :attribute deve ser um e-mail válido.',
+            'max'      => 'O campo :attribute deve ter no máximo :max caracteres.',
+            'min'      => 'O campo :attribute deve ter no mínimo :min caracteres.',
+            'same'     => 'Os campos :attribute e :other devem ser iguais.',
+            'unique'   => 'O campo :attribute já está em uso.',
+            'date'     => 'O campo :attribute deve ser uma data válida.',
 
         ];
     }
+
     public function failedValidation(ValidationValidator $validator): void
     {
         throw new HttpResponseException(response()->json([
-            "message" => "Dados fornecidos são inválidos.",
-            "errors" => $validator->errors()
+            'message' => 'Dados fornecidos são inválidos.',
+            'errors'  => $validator->errors(),
         ], 422));
     }
 }

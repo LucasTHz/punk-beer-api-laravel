@@ -6,7 +6,6 @@ use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpFoundation\Response;
 
-
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
         web: __DIR__ . '/../routes/web.php',
@@ -28,7 +27,7 @@ return Application::configure(basePath: dirname(__DIR__))
             if ($exceptions instanceof ValidationException) {
                 return response([
                     'message' => 'Erro de validação.',
-                    'errors' => $exceptions->errors(),
+                    'errors'  => $exceptions->errors(),
                 ], 422);
             }
 

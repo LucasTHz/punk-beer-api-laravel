@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\DataTransferObjects\Favorite\FavoriteDTO;
-use App\Http\Requests\StoreFavoriteRequest;
 use App\Http\Requests\UpdateFavoriteRequest;
 use App\Http\Resources\FavoriteResource;
 use App\Models\Favorite;
@@ -12,7 +10,6 @@ use Illuminate\Http\Request;
 
 class FavoriteController extends Controller
 {
-
     public function __construct(
         private FavoriteService $service
     ) {
@@ -26,7 +23,7 @@ class FavoriteController extends Controller
         $auth = auth()->user();
 
         return response([
-            'favorites' => 'ola mundo'
+            'favorites' => 'ola mundo',
         ]);
     }
 

@@ -1,9 +1,8 @@
 <?php
+
 namespace App\DataTransferObjects\User;
 
 use Illuminate\Http\Request;
-
-
 
 readonly class UserDTO
 {

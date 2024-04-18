@@ -1,6 +1,7 @@
 <?php
 
 namespace App\DataTransferObjects\Favorite;
+
 use Illuminate\Http\Request;
 
 readonly class FavoriteDTO
