@@ -19,7 +19,8 @@ class UserService
 
     public function update(array $userData, User $user): bool
     {
-        return $user::update([
+        \ds($userData);
+        return $user->update([
             'name'          => $userData['name'],
             'email'         => $userData['email'],
             'date_of_birth' => $userData['dateOfBirth'],

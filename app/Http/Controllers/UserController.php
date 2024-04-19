@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use App\Services\User\UserService;
@@ -38,11 +39,14 @@ class UserController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     *  Update the specified resource in storage.
+     * @param UpdateUserRequest $request
+     * @param User $user
+     * @return Response
      */
-    public function update(Request $request, User $user): Response
+    public function update(UpdateUserRequest $request, User $user): Response
     {
-        $user = $this->service->update($request->all(), $user);
+        $this->service->update($request->all(), $user);
 
         return response([
             'message' => 'Usuario atualizado com sucesso!',
@@ -55,7 +59,11 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user->delete();
+
+        return response([
+            'message' => 'Usuario deletado com sucesso!',
+        ]);
     }
 
     public function login(Request $request)
