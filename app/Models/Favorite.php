@@ -24,6 +24,16 @@ class Favorite extends Model
 
     protected $casts = [
         'fav_date_beer' => 'datetime',
-
+        'fav_alcohol'   => 'integer',
     ];
+
+    /**
+     * Get the user that owns the Favorite
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

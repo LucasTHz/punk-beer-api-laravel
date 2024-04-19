@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreFavoriteRequest;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Resources\UserResource;
@@ -35,14 +36,11 @@ class UserController extends Controller
         return response([
             'message' => 'Usuario consultado com sucesso!',
             'data'    => UserResource::make($user),
-        ]);
+        ], 200);
     }
 
     /**
      *  Update the specified resource in storage.
-     * @param UpdateUserRequest $request
-     * @param User $user
-     * @return Response
      */
     public function update(UpdateUserRequest $request, User $user): Response
     {
@@ -51,7 +49,7 @@ class UserController extends Controller
         return response([
             'message' => 'Usuario atualizado com sucesso!',
             'data'    => UserResource::make($user),
-        ]);
+        ], 200);
     }
 
     /**
@@ -63,11 +61,20 @@ class UserController extends Controller
 
         return response([
             'message' => 'Usuario deletado com sucesso!',
-        ]);
+        ], 200);
     }
 
-    public function login(Request $request)
+    /**
+     * Create a favorite for the user.
+     *
+     * @param  Request  $request
+     */
+    public function createFavorite(StoreFavoriteRequest $request, User $user)
     {
-        ds('ola mundo');
+        $favorite = $this->service->createFavorite($request->all(), $user);
+
+        return response([
+            'message' => 'Favorito criado com sucesso!',
+        ], 201);
     }
 }

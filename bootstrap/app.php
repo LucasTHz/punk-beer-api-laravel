@@ -26,7 +26,7 @@ return Application::configure(basePath: dirname(__DIR__))
 
             if ($exceptions instanceof ValidationException) {
                 return response([
-                    'message' => 'Erro de validação.',
+                    'message' => 'Dados informados são inválidos.',
                     'errors'  => $exceptions->errors(),
                 ], 422);
             }
