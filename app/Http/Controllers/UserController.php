@@ -63,18 +63,4 @@ class UserController extends Controller
             'message' => 'Usuario deletado com sucesso!',
         ], 200);
     }
-
-    /**
-     * Create a favorite for the user.
-     *
-     * @param  Request  $request
-     */
-    public function createFavorite(StoreFavoriteRequest $request, User $user)
-    {
-        $favorite = $this->service->createFavorite($request->all(), $user);
-
-        return response([
-            'message' => 'Favorito criado com sucesso!',
-        ], 201);
-    }
 }

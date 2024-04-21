@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreFavoriteRequest;
 use App\Http\Requests\UpdateFavoriteRequest;
 use App\Http\Resources\FavoriteResource;
 use App\Models\Favorite;
@@ -30,12 +31,14 @@ class FavoriteController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreFavoriteRequest $request)
     {
-        ds($request->all());
-        $favorite = $this->service->store($request);
+        $favorite = $this->service->store($request->all(), auth()->id());
 
-        return FavoriteResource::make($favorite);
+        return response([
+            'message' => 'Favorito criado com sucesso!',
+            'data'    => FavoriteResource::make($favorite),
+        ], 201);
     }
 
     /**

@@ -3,25 +3,16 @@
 namespace App\Services\Favorite;
 
 use App\Models\Favorite;
-use Illuminate\Http\Request;
 
 class FavoriteService
 {
-    public function store(Request $request)
+    /**
+     * Create a favorite for the user.
+     */
+    public function store(array $favoriteData, int $userId): Favorite
     {
-        $user_id = auth()->id();
+        $favoriteData['user_id'] = $userId;
 
-        return Favorite::create([
-            'user_id'         => $user_id,
-            'fav_description' => $request->favoriteDescription,
-            'fav_name'        => $request->favoriteName,
-            'fav_tagline'     => $request->favoriteTagLine,
-            'fav_alcohol'     => $request->favoriteAlcohol,
-            'fav_amargor'     => $request->favoriteAmargor,
-            'fav_food'        => $request->favoriteFood,
-            'fav_tips'        => $request->favoriteTips,
-            'fav_img_url'     => $request->favoriteImgUrl,
-            'fav_date_beer'   => $request->favoriteDateBeer,
-        ]);
+        return Favorite::create($favoriteData);
     }
 }

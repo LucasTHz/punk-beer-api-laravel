@@ -2,7 +2,6 @@
 
 namespace App\Services\User;
 
-use App\Models\Favorite;
 use App\Models\User;
 
 class UserService
@@ -25,12 +24,5 @@ class UserService
             'email'         => $userData['email'],
             'date_of_birth' => $userData['dateOfBirth'],
         ]);
-    }
-
-    public function createFavorite(array $favoriteData, User $user): Favorite
-    {
-        $favoriteData['user_id'] = $user->id;
-
-        return $user->favorites()->create($favoriteData);
     }
 }
