@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreFavoriteRequest;
 use App\Http\Requests\UpdateFavoriteRequest;
+use App\Http\Resources\FavoriteCollection;
 use App\Http\Resources\FavoriteResource;
 use App\Models\Favorite;
 use App\Services\Favorite\FavoriteService;
-use Illuminate\Http\Request;
 
 class FavoriteController extends Controller
 {
@@ -21,11 +21,10 @@ class FavoriteController extends Controller
      */
     public function index()
     {
-        $auth = auth()->user();
+        $userId = auth()->id();
 
-        return response([
-            'favorites' => 'ola mundo',
-        ]);
+        return FavoriteResource::collection(Favorite::where('user_id', $userId)->paginate());
+
     }
 
     /**
