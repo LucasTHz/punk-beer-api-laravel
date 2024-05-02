@@ -10,7 +10,7 @@ class AuthController
 {
     public function login(AuthLoginRequest $request): Response
     {
-        $token = AuthService::attempt($request->only('email', 'password', 'deviceName'));
+        $token = AuthService::attempt($request->safe()->only('email', 'password', 'deviceName'));
 
         return response([
             'message' => 'Autenticação realizada com sucesso.',
