@@ -1,7 +1,7 @@
 {
     "preset": "laravel",
     "rules": {
-        "align_multiline_comment": false,
+        "align_multiline_comment": { "comment_type": "phpdocs_only" },
         "new_with_braces": {
             "anonymous_class": false,
             "named_class": false
@@ -38,7 +38,6 @@
         "combine_consecutive_issets": false,
         "combine_consecutive_unsets": false,
         "combine_nested_dirname": false,
-        "comment_to_phpdoc": false,
         "compact_nullable_typehint": false,
         "concat_space": {
             "spacing": "one"
@@ -52,8 +51,8 @@
         },
         "declare_strict_types": false,
         "dir_constant": false,
-        "doctrine_annotation_array_assignment": false,
-        "doctrine_annotation_braces": false,
+        // "doctrine_annotation_array_assignment": {},
+        // "doctrine_annotation_braces": false,
         "doctrine_annotation_indentation": {
             "ignored_tags": [],
             "indent_mixed_lines": true
@@ -68,7 +67,7 @@
         "indentation_type": true,
         "no_useless_else": true,
         "no_useless_return": true,
-        "ordered_imports": true,
+        "ordered_imports": { "imports_order": true },
         "single_quote": false,
         "ternary_operator_spaces": true,
         "no_extra_blank_lines": true,
@@ -79,6 +78,7 @@
         "ternary_to_null_coalescing": true,
         "whitespace_after_comma_in_array": true,
         "trim_array_spaces": true,
-        "unary_operator_spaces": true
+        "unary_operator_spaces": true,
+        "fully_qualified_strict_types": true
     }
 }

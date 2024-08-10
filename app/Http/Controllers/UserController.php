@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateUserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use App\Services\User\UserService;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Response;
 
 class UserController extends Controller
@@ -19,11 +20,17 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreUserRequest $request)
+    public function store(Sto1reUserRequest $request)
     {
         $user = $this->service->store($request->all());
 
-        return UserResource::make($user);
+        event(new Registered($user));
+
+        return response([
+            'message' => 'Link de verificaçao enviado para o email!',
+        ], 201);
+
+        // return UserResource::make($user);
     }
 
     /**
