@@ -8,9 +8,6 @@ class FavoriteService
 {
     /**
      * Create a favorite for the user.
-     * @param array $favoriteData
-     * @param int $userId
-     * @return Favorite
      */
     public function store(array $favoriteData, int $userId): Favorite
     {
@@ -21,9 +18,6 @@ class FavoriteService
 
     /**
      * Update the favorite.
-     * @param array $favoriteData
-     * @param Favorite $favorite
-     * @return bool
      */
     public function update(array $favoriteData, Favorite $favorite): bool
     {
@@ -32,10 +26,7 @@ class FavoriteService
 
     /**
      * Make soft delete the favorite.
-     * @param Favorite $favorite
-     * @return bool
      */
-
     public function softDelete(Favorite $favorite): bool
     {
         return $favorite->delete();
@@ -43,8 +34,6 @@ class FavoriteService
 
     /**
      * Force delete the favorite.
-     * @param Favorite $favorite
-     * @return bool
      */
     public function forceDelete(Favorite $favorite): bool
     {

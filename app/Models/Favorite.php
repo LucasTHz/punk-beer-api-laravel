@@ -25,7 +25,7 @@ class Favorite extends Model
 
     protected $casts = [
         'fav_date_beer' => 'datetime',
-        'fav_alcohol'   => 'integer',
+        'fav_alcohol' => 'integer',
     ];
 
     /**

@@ -12,8 +12,7 @@ readonly class UserDTO
         public readonly string $password,
         public readonly string $dateOfBirth,
         public readonly string $document,
-    ) {
-    }
+    ) {}
 
     public static function fromRequest(Request $request): self
     {

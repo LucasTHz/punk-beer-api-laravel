@@ -8,19 +8,19 @@ use App\Http\Resources\UserResource;
 use App\Models\User;
 use App\Services\User\UserService;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\Response;
 
 class UserController extends Controller
 {
     public function __construct(
-        private UserService $service
-    ) {
-    }
+        private readonly UserService $service
+    ) {}
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Sto1reUserRequest $request)
+    public function store(StoreUserRequest $request): ResponseFactory|Response
     {
         $user = $this->service->store($request->all());
 
@@ -40,7 +40,7 @@ class UserController extends Controller
     {
         return response([
             'message' => 'Usuario consultado com sucesso!',
-            'data'    => UserResource::make($user),
+            'data' => UserResource::make($user),
         ], 200);
     }
 
@@ -53,7 +53,7 @@ class UserController extends Controller
 
         return response([
             'message' => 'Usuario atualizado com sucesso!',
-            'data'    => UserResource::make($user),
+            'data' => UserResource::make($user),
         ], 200);
     }
 

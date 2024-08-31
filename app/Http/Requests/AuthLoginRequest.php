@@ -22,8 +22,8 @@ class AuthLoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email'      => 'required|email',
-            'password'   => 'required',
+            'email' => 'required|email',
+            'password' => 'required',
             'deviceName' => 'required',
         ];
     }
@@ -32,8 +32,8 @@ class AuthLoginRequest extends FormRequest
     {
         return [
             'required' => 'O campo :attribute é obrigatório.',
-            'string'   => 'O campo :attribute deve ser uma string.',
-            'email'    => 'O campo :attribute deve ser um e-mail válido.',
+            'string' => 'O campo :attribute deve ser uma string.',
+            'email' => 'O campo :attribute deve ser um e-mail válido.',
         ];
     }
 }

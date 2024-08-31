@@ -22,8 +22,8 @@ class UpdateUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'        => 'required|string|max:255',
-            'email'       => 'required|string|email|max:255',
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255',
             'dateOfBirth' => 'required|date',
         ];
     }
@@ -31,15 +31,15 @@ class UpdateUserRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required'        => 'O campo nome é obrigatório.',
-            'name.string'          => 'O campo nome deve ser uma string.',
-            'name.max'             => 'O campo nome deve ter no máximo 255 caracteres.',
-            'email.required'       => 'O campo email é obrigatório.',
-            'email.string'         => 'O campo email deve ser uma string.',
-            'email.email'          => 'O campo email deve ser um email válido.',
-            'email.max'            => 'O campo email deve ter no máximo 255 caracteres.',
+            'name.required' => 'O campo nome é obrigatório.',
+            'name.string' => 'O campo nome deve ser uma string.',
+            'name.max' => 'O campo nome deve ter no máximo 255 caracteres.',
+            'email.required' => 'O campo email é obrigatório.',
+            'email.string' => 'O campo email deve ser uma string.',
+            'email.email' => 'O campo email deve ser um email válido.',
+            'email.max' => 'O campo email deve ter no máximo 255 caracteres.',
             'dateOfBirth.required' => 'O campo data de nascimento é obrigatório.',
-            'dateOfBirth.date'     => 'O campo data de nascimento deve ser uma data válida.',
+            'dateOfBirth.date' => 'O campo data de nascimento deve ser uma data válida.',
         ];
     }
 }

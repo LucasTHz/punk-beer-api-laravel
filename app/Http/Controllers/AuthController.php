@@ -14,7 +14,7 @@ class AuthController
 
         return response([
             'message' => 'Autenticação realizada com sucesso.',
-            'token'   => $token,
+            'token' => $token,
         ], 200);
     }
 }

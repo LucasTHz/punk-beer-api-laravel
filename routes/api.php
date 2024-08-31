@@ -3,8 +3,8 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\UserController;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Support\Facades\Route;
 
 Route::post('/user', [UserController::class, 'store']);
 
@@ -14,9 +14,9 @@ Route::apiResource('favorite', FavoriteController::class)->middleware('auth:sanc
 
 Route::post('/sanctum/token', [AuthController::class, 'login']);
 
-
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     ds($request->fulfill());
+
     return redirect('/home');
 
     return response([
