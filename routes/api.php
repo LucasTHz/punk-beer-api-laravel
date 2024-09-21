@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\EmailVerifyController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -14,12 +15,4 @@ Route::apiResource('favorite', FavoriteController::class)->middleware('auth:sanc
 
 Route::post('/sanctum/token', [AuthController::class, 'login']);
 
-Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
-    ds($request->fulfill());
-
-    return redirect('/home');
-
-    return response([
-        'message' => 'Email verificado com sucesso!',
-    ], 200);
-})->middleware(['auth:sanctum'])->name('verification.verify');
+Route::get('/email/verify/{id}/{hash}',[EmailVerifyController::class , 'verify'])->name('verification.verify');
