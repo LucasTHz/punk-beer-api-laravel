@@ -1,13 +1,19 @@
 <?php
 
+
+
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Favorite extends Model
 {
-    use HasFactory;
+    use HasFactory, HasUlids, SoftDeletes;
+
+    protected $primaryKey = 'id';
 
     protected $fillable = [
         'user_id',
@@ -24,6 +30,16 @@ class Favorite extends Model
 
     protected $casts = [
         'fav_date_beer' => 'datetime',
-
+        'fav_alcohol' => 'integer',
     ];
+
+    /**
+     * Get the user that owns the Favorite
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

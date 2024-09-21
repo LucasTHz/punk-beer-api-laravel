@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Requests\StoreFavoriteRequest;
+namespace App\DataTransferObjects\Favorite;
+
 use Illuminate\Http\Request;
 
 readonly class FavoriteDTO
@@ -16,8 +17,7 @@ readonly class FavoriteDTO
         public readonly string $favoriteTips,
         public readonly string $favoriteImgUrl,
         public readonly string $favoriteDateBeer,
-    ) {
-    }
+    ) {}
 
     public static function fromRequest(Request $request): self
     {
