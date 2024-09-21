@@ -8,13 +8,7 @@ class UserService
 {
     public function store(array $userData): User
     {
-        return User::create([
-            'name' => $userData['name'],
-            'email' => $userData['email'],
-            'password' => bcrypt($userData['password']),
-            'date_of_birth' => $userData['dateOfBirth'],
-            'document' => $userData['document'],
-        ]);
+        return User::create($userData);
     }
 
     public function update(array $userData, User $user): bool

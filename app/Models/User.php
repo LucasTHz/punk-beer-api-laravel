@@ -25,7 +25,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
-        'document',
+        'document_id',
         'date_of_birth',
     ];
 
@@ -59,4 +59,10 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Favorite::class);
     }
+
+    public function getEmailForVerification(): string
+    {
+        return $this->hasVerifiedEmail();
+    }
+
 }

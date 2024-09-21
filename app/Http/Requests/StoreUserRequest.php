@@ -29,7 +29,7 @@ class StoreUserRequest extends FormRequest
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8',
             'passwordConfirmation' => 'required|string|same:password',
-            'document' => 'required|string|max:14|unique:users',
+            'documentId' => 'required|string|max:14|unique:users',
             'dateOfBirth' => 'required|date',
         ];
     }
@@ -55,5 +55,16 @@ class StoreUserRequest extends FormRequest
             'message' => 'Dados fornecidos são inválidos.',
             'errors' => $validator->errors(),
         ], 422));
+    }
+
+    protected function passedValidation(): void
+    {
+        $this->replace([
+            'name' => $this->name,
+            'email' => $this->email,
+            'password' => bcrypt($this->password),
+            'document_id' => $this->documentId,
+            'date_of_birth' => $this->dateOfBirth
+        ]);
     }
 }
