@@ -30,7 +30,6 @@ class UserController extends Controller
             'message' => 'Link de verificaçao enviado para o email!',
         ], 201);
 
-        // return UserResource::make($user);
     }
 
     /**

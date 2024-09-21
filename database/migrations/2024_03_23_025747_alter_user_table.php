@@ -12,8 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('document', 14)->unique()->nullable();
+            $table->string('document_id', 14)->unique()->nullable();
             $table->date('date_of_birth')->nullable();
+            $table->ulid('id');
         });
     }
 
@@ -25,6 +26,7 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('document');
             $table->dropColumn('date_of_birth');
+            $table->dropColumn('id');
         });
     }
 };
