@@ -17,7 +17,6 @@ class EmailVerifyController extends Controller
             ], 400);
         }
 
-
         if (!$user) {
             return response([
                 'message' => 'Usuário não encontrado!',

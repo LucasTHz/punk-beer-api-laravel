@@ -9,19 +9,19 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
-        web: __DIR__.'/../routes/web.php',
-        api: __DIR__.'/../routes/api.php',
-        commands: __DIR__.'/../routes/console.php',
+        web: __DIR__ . '/../routes/web.php',
+        api: __DIR__ . '/../routes/api.php',
+        commands: __DIR__ . '/../routes/console.php',
         health: '/up',
     )
-    ->withMiddleware(function (Middleware $middleware) {
+    ->withMiddleware(function (Middleware $middleware): void {
         $middleware->alias([
             'verifyUserById' => \App\Http\Middleware\VerifyUserById::class,
         ]);
     })
-    ->withExceptions(function (Exceptions $exceptions) {
+    ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->respond(function (Response $response, $exceptions) {
-            if ($response->getStatusCode() === 401) {
+            if (401 === $response->getStatusCode()) {
                 return response([
                     'message' => 'Não autorizado.',
                 ], 401);
@@ -30,10 +30,9 @@ return Application::configure(basePath: dirname(__DIR__))
             if ($exceptions instanceof ValidationException) {
                 return response([
                     'message' => 'Dados informados são inválidos.',
-                    'errors' => $exceptions->errors(),
+                    'errors'  => $exceptions->errors(),
                 ], 422);
             }
-            ds($exceptions);
 
             if ($exceptions instanceof NotFoundHttpException) {
                 return response([
