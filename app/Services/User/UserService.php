@@ -13,10 +13,6 @@ class UserService
 
     public function update(array $userData, User $user): bool
     {
-        return $user->update([
-            'name' => $userData['name'],
-            'email' => $userData['email'],
-            'date_of_birth' => $userData['dateOfBirth'],
-        ]);
+        return $user->update($userData);
     }
 }
