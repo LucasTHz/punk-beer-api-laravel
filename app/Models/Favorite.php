@@ -1,7 +1,5 @@
 <?php
 
-
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
@@ -9,9 +7,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Favorite extends Model
+final class Favorite extends Model
 {
-    use HasFactory, HasUlids, SoftDeletes;
+    use HasFactory;
+    use HasUlids;
+    use SoftDeletes;
 
     protected $primaryKey = 'id';
 
@@ -25,12 +25,10 @@ class Favorite extends Model
         'fav_food',
         'fav_tips',
         'fav_img_url',
-        'fav_date_beer',
     ];
 
     protected $casts = [
-        'fav_date_beer' => 'datetime',
-        'fav_alcohol' => 'integer',
+        'fav_alcohol'   => 'integer',
     ];
 
     /**

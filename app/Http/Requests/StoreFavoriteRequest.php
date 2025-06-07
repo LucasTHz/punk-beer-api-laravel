@@ -74,7 +74,6 @@ final class StoreFavoriteRequest extends FormRequest
             'fav_food'        => $this->food,
             'fav_tips'        => $this->tips,
             'fav_img_url'     => $this->imgUrl,
-            'fav_date_beer'   => $this->dateBeer,
         ]);
     }
 }

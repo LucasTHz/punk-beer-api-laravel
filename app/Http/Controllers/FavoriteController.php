@@ -7,11 +7,12 @@ use App\Http\Resources\FavoriteResource;
 use App\Models\Favorite;
 use App\Services\Favorite\FavoriteService;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 
-class FavoriteController extends Controller
+final class FavoriteController extends Controller
 {
     public function __construct(
-        private FavoriteService $service
+        private FavoriteService $service,
     ) {}
 
     /**
@@ -19,9 +20,18 @@ class FavoriteController extends Controller
      */
     public function index()
     {
-        $userId = auth()->id();
+        $favorites = Favorite::where('user_id', Auth::id())->paginate(10);
 
-        return FavoriteResource::collection(Favorite::where('user_id', $userId)->paginate());
+        return response([
+            'message'    => 'Favoritos consultados com sucesso!',
+            'data'       => FavoriteResource::collection($favorites),
+            'pagination' => [
+                'pageSize'     => $favorites->perPage(),
+                'page'         => $favorites->currentPage(),
+                'totalPages'   => $favorites->lastPage(),
+                'totalRecords' => $favorites->total(),
+            ],
+        ]);
     }
 
     /**
@@ -29,11 +39,11 @@ class FavoriteController extends Controller
      */
     public function store(StoreFavoriteRequest $request): Response
     {
-        $favorite = $this->service->store($request->all(), auth()->id());
+        $favorite = $this->service->store($request->all(), Auth::id());
 
         return response([
             'message' => 'Favorito criado com sucesso!',
-            'data' => FavoriteResource::make($favorite),
+            'data'    => FavoriteResource::make($favorite),
         ], 201);
     }
 
@@ -44,7 +54,7 @@ class FavoriteController extends Controller
     {
         return response([
             'message' => 'Favorito consultado com sucesso!',
-            'data' => FavoriteResource::make($favorite),
+            'data'    => FavoriteResource::make($favorite),
         ], 200);
     }
 
@@ -57,7 +67,6 @@ class FavoriteController extends Controller
 
         return response([
             'message' => 'Favorito atualizado com sucesso!',
-            'data' => FavoriteResource::make($favorite),
         ], 200);
     }
 
