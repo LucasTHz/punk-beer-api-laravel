@@ -17,19 +17,33 @@ final class Favorite extends Model
 
     protected $fillable = [
         'user_id',
-        'fav_description',
-        'fav_name',
-        'fav_tag_line',
-        'fav_alcohol',
-        'fav_amargor',
-        'fav_food',
-        'fav_tips',
-        'fav_img_url',
+        'description',
+        'ulid',
+        'name',
+        'tag_line',
+        'alcohol',
+        'amargor',
+        'food',
+        'tips',
+        'img_url',
     ];
 
     protected $casts = [
-        'fav_alcohol'   => 'integer',
+        'alcohol'   => 'integer',
     ];
+
+    /**
+     * Get the columns that should receive a unique identifier.
+     */
+    public function uniqueIds(): array
+    {
+        return ['ulid'];
+    }
+
+    public function getRouteKeyName(): string
+    {
+        return 'ulid';
+    }
 
     /**
      * Get the user that owns the Favorite

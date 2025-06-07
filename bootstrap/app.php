@@ -3,6 +3,7 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Validation\UnauthorizedException;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -38,6 +39,12 @@ return Application::configure(basePath: dirname(__DIR__))
                 return response([
                     'message' => 'Recurso não encontrado.',
                 ], 404);
+            }
+
+            if ($exceptions instanceof UnauthorizedException) {
+                return response([
+                    'message' => $exceptions->getMessage(),
+                ], 403);
             }
 
             return $response;

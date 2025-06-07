@@ -3,8 +3,10 @@
 namespace App\Services\Favorite;
 
 use App\Models\Favorite;
+use App\Models\User;
+use Illuminate\Validation\UnauthorizedException;
 
-class FavoriteService
+final class FavoriteService
 {
     /**
      * Create a favorite for the user.
@@ -19,24 +21,34 @@ class FavoriteService
     /**
      * Update the favorite.
      */
-    public function update(array $favoriteData, Favorite $favorite): bool
+    public function update(array $favoriteData, Favorite $favorite, int $userId): bool
     {
+        if ($userId !== $favorite->user_id) {
+            throw new UnauthorizedException("Você não tem permissão para atualizar este favorito.");
+        }
+
         return $favorite->update($favoriteData);
     }
 
     /**
      * Make soft delete the favorite.
      */
-    public function softDelete(Favorite $favorite): bool
+    public function softDelete(Favorite $favorite, int $userId): bool
     {
+        if ($userId !== $favorite->user_id) {
+            throw new UnauthorizedException("Você não tem permissão para atualizar este favorito.");
+        }
         return $favorite->delete();
     }
 
     /**
      * Force delete the favorite.
      */
-    public function forceDelete(Favorite $favorite): bool
+    public function forceDelete(Favorite $favorite, int $userId): bool
     {
+        if ($userId !== $favorite->user_id) {
+            throw new UnauthorizedException("Você não tem permissão para atualizar este favorito.");
+        }
         return $favorite->forceDelete();
     }
 }

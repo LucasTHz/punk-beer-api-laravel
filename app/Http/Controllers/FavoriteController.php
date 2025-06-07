@@ -6,6 +6,7 @@ use App\Http\Requests\StoreFavoriteRequest;
 use App\Http\Resources\FavoriteResource;
 use App\Models\Favorite;
 use App\Services\Favorite\FavoriteService;
+use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 
@@ -39,11 +40,10 @@ final class FavoriteController extends Controller
      */
     public function store(StoreFavoriteRequest $request): Response
     {
-        $favorite = $this->service->store($request->all(), Auth::id());
+        $this->service->store($request->all(), Auth::id());
 
         return response([
             'message' => 'Favorito criado com sucesso!',
-            'data'    => FavoriteResource::make($favorite),
         ], 201);
     }
 
@@ -61,9 +61,9 @@ final class FavoriteController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(StoreFavoriteRequest $request, Favorite $favorite): Response
+    public function update(Favorite $favorite, StoreFavoriteRequest $request): Response
     {
-        $this->service->update($request->all(), $favorite);
+        $this->service->update($request->all(), $favorite, $request->user()->id);
 
         return response([
             'message' => 'Favorito atualizado com sucesso!',
@@ -73,9 +73,9 @@ final class FavoriteController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Favorite $favorite): Response
+    public function destroy(Favorite $favorite, Request $request): Response
     {
-        $this->service->forceDelete($favorite);
+        $this->service->forceDelete($favorite, $request->user()->id);
 
         return response([
             'message' => 'Favorito deletado com sucesso!',

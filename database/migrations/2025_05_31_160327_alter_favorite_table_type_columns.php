@@ -11,8 +11,15 @@ return new class () extends Migration {
     public function up(): void
     {
         Schema::table('favorites', function (Blueprint $table): void {
-            $table->id()->primary()->change();
-            $table->ulid('ulid')->unique()->after('id');
+            $table->dropColumn('fav_date_beer');
+            $table->renameColumn('fav_description', 'description');
+            $table->renameColumn('fav_name', 'name');
+            $table->renameColumn('fav_tag_line', 'tag_line');
+            $table->renameColumn('fav_alcohol', 'alcohol');
+            $table->renameColumn('fav_amargor', 'amargor');
+            $table->renameColumn('fav_food', 'food');
+            $table->renameColumn('fav_tips', 'tips');
+            $table->renameColumn('fav_img_url', 'img_url');
         });
     }
 
@@ -23,7 +30,6 @@ return new class () extends Migration {
     {
         Schema::table('favorites', function (Blueprint $table): void {
             $table->dropColumn('id');
-            $table->dropColumn('ulid');
         });
     }
 };

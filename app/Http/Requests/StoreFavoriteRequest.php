@@ -66,14 +66,14 @@ final class StoreFavoriteRequest extends FormRequest
     protected function passedValidation(): void
     {
         $this->replace([
-            'fav_name'        => $this->name,
-            'fav_description' => $this->description,
-            'fav_tag_line'    => $this->tagLine,
-            'fav_alcohol'     => $this->alcohol,
-            'fav_amargor'     => $this->amargor,
-            'fav_food'        => $this->food,
-            'fav_tips'        => $this->tips,
-            'fav_img_url'     => $this->imgUrl,
+            'name'            => $this->name,
+            'description'     => $this->description,
+            'tag_line'        => $this->tagLine,
+            'alcohol'         => $this->alcohol,
+            'amargor'         => $this->amargor,
+            'food'            => $this->food,
+            'tips'            => $this->tips,
+            'img_url'         => $this->imgUrl,
         ]);
     }
 }

@@ -12,6 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('favorites', function (Blueprint $table) {
+            $table->id()->primary();
+            $table->ulid('ulid')->unique();
             $table->foreignId('user_id')->constrained('users');
             $table->string('fav_description', 255);
             $table->string('fav_name', 30);
@@ -22,8 +24,6 @@ return new class extends Migration
             $table->string('fav_tips', 255);
             $table->string('fav_img_url', 255);
             $table->timestamp('fav_date_beer');
-            $table->ulid('id');
-
             $table->timestamps();
         });
     }
