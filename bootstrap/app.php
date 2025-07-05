@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -22,6 +23,13 @@ return Application::configure(basePath: dirname(__DIR__))
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->respond(function (Response $response, $exceptions) {
+
+            if ($exceptions instanceof AuthenticationException) {
+                return response([
+                    'message' => $exceptions->getMessage(),
+                ], 401);
+            }
+
             if (401 === $response->getStatusCode()) {
                 return response([
                     'message' => 'Não autorizado.',
@@ -31,7 +39,7 @@ return Application::configure(basePath: dirname(__DIR__))
             if ($exceptions instanceof ValidationException) {
                 return response([
                     'message' => 'Dados informados são inválidos.',
-                    'errors'  => $exceptions->errors(),
+                    'errors'  => ($exceptions->errors()),
                 ], 422);
             }
 
