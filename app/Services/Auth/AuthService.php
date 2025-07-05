@@ -13,7 +13,7 @@ class AuthService
         $user = User::where('email', $credentials['email'])->first();
 
         if (! $user || ! Hash::check($credentials['password'], $user->password)) {
-            throw new AuthenticationException('As credenciais informadas estão incorretas.');
+            throw new AuthenticationException();
         }
 
         return $user->createToken($credentials['deviceName'])->plainTextToken;

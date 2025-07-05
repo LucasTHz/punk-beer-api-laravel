@@ -26,7 +26,7 @@ return Application::configure(basePath: dirname(__DIR__))
 
             if ($exceptions instanceof AuthenticationException) {
                 return response([
-                    'message' => $exceptions->getMessage(),
+                    'message' => 'As credenciais informadas estão incorretas.',
                 ], 401);
             }
 
