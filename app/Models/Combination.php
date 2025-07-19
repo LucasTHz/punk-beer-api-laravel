@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-final class Favorite extends Model
+final class Combination extends Model
 {
     use HasFactory;
     use HasUlids;
@@ -46,7 +46,7 @@ final class Favorite extends Model
     }
 
     /**
-     * Get the user that owns the Favorite
+     * Get the user that owns the Combination
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

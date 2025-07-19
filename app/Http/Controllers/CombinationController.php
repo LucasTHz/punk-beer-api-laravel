@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreFavoriteRequest;
-use App\Http\Resources\FavoriteResource;
-use App\Models\Favorite;
-use App\Services\Favorite\FavoriteService;
+use App\Http\Requests\StoreCombinationRequest;
+use App\Http\Resources\CombinationResource;
+use App\Models\Combination;
+use App\Services\Combination\CombinationService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 
-final class FavoriteController extends Controller
+final class CombinationController extends Controller
 {
     public function __construct(
-        private FavoriteService $service,
+        private CombinationService $service,
     ) {}
 
     /**
@@ -21,16 +21,16 @@ final class FavoriteController extends Controller
      */
     public function index()
     {
-        $favorites = Favorite::where('user_id', Auth::id())->paginate(10);
+        $combinations = Combination::where('user_id', Auth::id())->paginate(10);
 
         return response([
             'message'    => 'Favoritos consultados com sucesso!',
-            'data'       => FavoriteResource::collection($favorites),
+            'data'       => CombinationResource::collection($combinations),
             'pagination' => [
-                'pageSize'     => $favorites->perPage(),
-                'page'         => $favorites->currentPage(),
-                'totalPages'   => $favorites->lastPage(),
-                'totalRecords' => $favorites->total(),
+                'pageSize'     => $combinations->perPage(),
+                'page'         => $combinations->currentPage(),
+                'totalPages'   => $combinations->lastPage(),
+                'totalRecords' => $combinations->total(),
             ],
         ]);
     }
@@ -38,7 +38,7 @@ final class FavoriteController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreFavoriteRequest $request): Response
+    public function store(StoreCombinationRequest $request): Response
     {
         $this->service->store($request->all(), Auth::id());
 
@@ -50,20 +50,20 @@ final class FavoriteController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Favorite $favorite): Response
+    public function show(Combination $combination): Response
     {
         return response([
             'message' => 'Favorito consultado com sucesso!',
-            'data'    => FavoriteResource::make($favorite),
+            'data'    => CombinationResource::make($combination),
         ], 200);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Favorite $favorite, StoreFavoriteRequest $request): Response
+    public function update(Combination $combination, StoreCombinationRequest $request): Response
     {
-        $this->service->update($request->all(), $favorite, $request->user()->id);
+        $this->service->update($request->all(), $combination, $request->user()->id);
 
         return response([
             'message' => 'Favorito atualizado com sucesso!',
@@ -73,9 +73,9 @@ final class FavoriteController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Favorite $favorite, Request $request): Response
+    public function destroy(Combination $combination, Request $request): Response
     {
-        $this->service->forceDelete($favorite, $request->user()->id);
+        $this->service->forceDelete($combination, $request->user()->id);
 
         return response([
             'message' => 'Favorito deletado com sucesso!',

@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EmailVerifyController;
-use App\Http\Controllers\FavoriteController;
+use App\Http\Controllers\CombinationController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,7 +14,7 @@ Route::middleware(['auth:sanctum'])->group(function (): void {
     Route::delete('/user/me', [UserController::class, 'destroy']);
 });
 
-Route::apiResource('favorite/me', FavoriteController::class)
+Route::apiResource('favorite/me', CombinationController::class)
     ->parameters(['me' => 'favorite'])
     ->middleware('auth:sanctum');
 

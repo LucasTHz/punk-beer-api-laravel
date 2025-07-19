@@ -58,11 +58,11 @@ final class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
-     * Get the favorites for the user.
+     * Get the combinations for the user.
      */
-    public function favorites(): HasMany
+    public function combinations(): HasMany
     {
-        return $this->hasMany(Favorite::class);
+        return $this->hasMany(Combination::class);
     }
 
     public function getEmailForVerification(): bool
