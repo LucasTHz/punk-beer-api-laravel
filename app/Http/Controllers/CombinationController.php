@@ -24,7 +24,7 @@ final class CombinationController extends Controller
         $combinations = Combination::where('user_id', Auth::id())->paginate(10);
 
         return response([
-            'message'    => 'Favoritos consultados com sucesso!',
+            'message'    => 'Combinações consultados com sucesso!',
             'data'       => CombinationResource::collection($combinations),
             'pagination' => [
                 'pageSize'     => $combinations->perPage(),
@@ -43,7 +43,7 @@ final class CombinationController extends Controller
         $this->service->store($request->all(), Auth::id());
 
         return response([
-            'message' => 'Favorito criado com sucesso!',
+            'message' => 'Combinação criado com sucesso!',
         ], 201);
     }
 
@@ -53,7 +53,7 @@ final class CombinationController extends Controller
     public function show(Combination $combination): Response
     {
         return response([
-            'message' => 'Favorito consultado com sucesso!',
+            'message' => 'Combinação consultado com sucesso!',
             'data'    => CombinationResource::make($combination),
         ], 200);
     }
@@ -66,7 +66,7 @@ final class CombinationController extends Controller
         $this->service->update($request->all(), $combination, $request->user()->id);
 
         return response([
-            'message' => 'Favorito atualizado com sucesso!',
+            'message' => 'Combinação atualizado com sucesso!',
         ], 200);
     }
 
@@ -78,7 +78,7 @@ final class CombinationController extends Controller
         $this->service->forceDelete($combination, $request->user()->id);
 
         return response([
-            'message' => 'Favorito deletado com sucesso!',
+            'message' => 'Combinação deletado com sucesso!',
         ], 200);
     }
 }

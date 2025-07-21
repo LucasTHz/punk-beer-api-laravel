@@ -14,8 +14,8 @@ Route::middleware(['auth:sanctum'])->group(function (): void {
     Route::delete('/user/me', [UserController::class, 'destroy']);
 });
 
-Route::apiResource('favorite/me', CombinationController::class)
-    ->parameters(['me' => 'favorite'])
+Route::apiResource('combinations/me', CombinationController::class)
+    ->parameters(['me' => 'combinations'])
     ->middleware('auth:sanctum');
 
 Route::post('/sanctum/token', [AuthController::class, 'login']);
