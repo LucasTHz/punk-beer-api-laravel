@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AuthLoginRequest extends FormRequest
+final class AuthLoginRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,8 +22,8 @@ class AuthLoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => 'required|email',
-            'password' => 'required',
+            'email'      => 'required|email',
+            'password'   => 'required',
             'deviceName' => 'required',
         ];
     }
@@ -32,8 +32,8 @@ class AuthLoginRequest extends FormRequest
     {
         return [
             'required' => 'O campo :attribute é obrigatório.',
-            'string' => 'O campo :attribute deve ser uma string.',
-            'email' => 'O campo :attribute deve ser um e-mail válido.',
+            'string'   => 'O campo :attribute deve ser uma string.',
+            'email'    => 'O campo :attribute deve ser um e-mail válido.',
         ];
     }
 }

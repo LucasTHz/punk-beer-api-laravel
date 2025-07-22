@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('favorites', function (Blueprint $table) {
-            $table->softDeletes();
+            // Rename the table to combinations
+            $table->rename('combinations');
         });
     }
 
@@ -21,8 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        // Schema::table('favorites', function (Blueprint $table) {
-        //     $table->dropSoftDeletes();
-        // });
+        //
     }
 };

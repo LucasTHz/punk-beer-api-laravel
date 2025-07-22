@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->string('document_id', 14)->unique()->nullable();
             $table->date('date_of_birth')->nullable();
-            $table->ulid('id')->change();
         });
     }
 
@@ -26,7 +25,6 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('document_id');
             $table->dropColumn('date_of_birth');
-            $table->dropColumn('id');
         });
     }
 };

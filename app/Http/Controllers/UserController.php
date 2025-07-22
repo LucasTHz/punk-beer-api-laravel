@@ -10,8 +10,9 @@ use App\Services\User\UserService;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 
-class UserController extends Controller
+final class UserController extends Controller
 {
     public function __construct(
         private readonly UserService $service
@@ -22,7 +23,7 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request): ResponseFactory|Response
     {
-        $user = $this->service->store($request->all());
+        $user = $this->service->store($request->validated());
 
         event(new Registered($user));
 
@@ -35,24 +36,28 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(User $user): Response
+    public function show(): Response
     {
+        $user = Auth::user();
+
         return response([
             'message' => 'Usuario consultado com sucesso!',
-            'data' => UserResource::make($user),
+            'data'    => UserResource::make($user),
         ], 200);
     }
 
     /**
      *  Update the specified resource in storage.
      */
-    public function update(UpdateUserRequest $request, User $user): Response
+    public function update(UpdateUserRequest $request): Response
     {
-        $this->service->update($request->all(), $user);
+        $user = $request->user();
+
+        $this->service->update($request->validated(), $user);
 
         return response([
             'message' => 'Usuario atualizado com sucesso!',
-            'data' => UserResource::make($user),
+            'data'    => [],
         ], 200);
     }
 

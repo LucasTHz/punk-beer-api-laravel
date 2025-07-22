@@ -2,17 +2,26 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EmailVerifyController;
-use App\Http\Controllers\FavoriteController;
+use App\Http\Controllers\CombinationController;
+use App\Http\Controllers\FeedController;
 use App\Http\Controllers\UserController;
-use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/user', [UserController::class, 'store']);
 
-Route::apiResource('user', UserController::class)->except(['index', 'store'])->middleware(['auth:sanctum', 'verifyUserById']);
+Route::middleware(['auth:sanctum'])->group(function (): void {
+    Route::get('/user/me', [UserController::class, 'show']);
+    Route::put('/user/me', [UserController::class, 'update']);
+    Route::delete('/user/me', [UserController::class, 'destroy']);
+});
 
-Route::apiResource('favorite', FavoriteController::class)->middleware('auth:sanctum');
+Route::apiResource('combinations/me', CombinationController::class)
+    ->parameters(['me' => 'combinations'])
+    ->middleware('auth:sanctum');
+
+Route::get('combinations/feed', [FeedController::class, 'feed'])
+    ->middleware('auth:sanctum');
 
 Route::post('/sanctum/token', [AuthController::class, 'login']);
 
-Route::get('/email/verify/{id}/{hash}',[EmailVerifyController::class , 'verify'])->name('verification.verify');
+Route::get('/email/verify/{id}/{hash}', [EmailVerifyController::class , 'verify'])->name('verification.verify');

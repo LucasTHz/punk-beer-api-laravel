@@ -3,8 +3,8 @@
 namespace App\Services\Auth;
 
 use App\Models\User;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\ValidationException;
 
 class AuthService
 {
@@ -13,9 +13,7 @@ class AuthService
         $user = User::where('email', $credentials['email'])->first();
 
         if (! $user || ! Hash::check($credentials['password'], $user->password)) {
-            throw ValidationException::withMessages([
-                'E-mail ou senha incorretos.',
-            ]);
+            throw new AuthenticationException();
         }
 
         return $user->createToken($credentials['deviceName'])->plainTextToken;
