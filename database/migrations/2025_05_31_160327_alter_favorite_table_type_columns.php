@@ -28,8 +28,8 @@ return new class () extends Migration {
      */
     public function down(): void
     {
-        Schema::table('favorites', function (Blueprint $table): void {
-            $table->dropColumn('id');
-        });
+        // Schema::table('favorites', function (Blueprint $table): void {
+        //     $table->dropColumn('id');
+        // });
     }
 };
