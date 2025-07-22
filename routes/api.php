@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EmailVerifyController;
 use App\Http\Controllers\CombinationController;
+use App\Http\Controllers\FeedController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -16,6 +17,9 @@ Route::middleware(['auth:sanctum'])->group(function (): void {
 
 Route::apiResource('combinations/me', CombinationController::class)
     ->parameters(['me' => 'combinations'])
+    ->middleware('auth:sanctum');
+
+Route::get('combinations/feed', [FeedController::class, 'feed'])
     ->middleware('auth:sanctum');
 
 Route::post('/sanctum/token', [AuthController::class, 'login']);
