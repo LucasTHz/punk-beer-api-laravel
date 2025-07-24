@@ -11,6 +11,10 @@ use Illuminate\Support\Facades\Auth;
 
 class FeedController extends Controller
 {
+
+    public function __construct(private FavoriteService $favoriteService = new FavoriteService())
+    {
+    }
         /**
      * Display a feed of combinations.
      */
@@ -33,7 +37,7 @@ class FeedController extends Controller
 
     public function addToFavorites(Combination $combination)
     {
-        (new FavoriteService())->addToFavorites($combination->id, Auth::id());
+        $this->favoriteService->addToFavorites($combination->id, Auth::id());
 
         return response([
             'message' => 'Combinação adicionada aos favoritos com sucesso!',
@@ -42,7 +46,7 @@ class FeedController extends Controller
 
     public function removeFromFavorites(Combination $combination)
     {
-        (new FavoriteService())->removeFromFavorites($combination->id, Auth::id());
+        $this->favoriteService->removeFromFavorites($combination->id, Auth::id());
 
         return response([
             'message' => 'Combinação removida dos favoritos com sucesso!',
