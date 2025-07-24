@@ -3,7 +3,6 @@
 namespace App\Services\Combination;
 
 use App\Models\Combination;
-use App\Models\User;
 use Illuminate\Validation\UnauthorizedException;
 
 final class CombinationService

@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('favorites', function (Blueprint $table) {
-            $table->rename('combinations');
+        Schema::table('combination_favorite', function (Blueprint $table): void {
+            $table->rename('combination_favorites');
         });
     }
 
@@ -21,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('combinations', function (Blueprint $table) {
-            $table->rename('favorites');
+        Schema::table('combination_favorites', function (Blueprint $table): void {
+            $table->rename('combination_favorite');
         });
     }
 };
