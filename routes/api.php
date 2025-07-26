@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CombinationController;
 use App\Http\Controllers\EmailVerifyController;
+use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\FeedController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -15,8 +16,8 @@ Route::middleware(['auth:sanctum'])->group(function (): void {
     Route::delete('/user/me', [UserController::class, 'destroy']);
 
     Route::prefix('favorites')->group(function (): void {
-        Route::get('/', [FeedController::class, 'index']);
-        Route::get('{combination}', [FeedController::class, 'show']);
+        Route::get('/', [FavoriteController::class, 'index']);
+        Route::get('{combination}', [FavoriteController::class, 'show']);
         Route::post('/combinations/{combination}', [FeedController::class, 'addToFavorites']);
         Route::delete('/combinations/{combination}', [FeedController::class, 'removeFromFavorites']);
     });

@@ -70,6 +70,12 @@ final class User extends Authenticatable implements MustVerifyEmail
         return $this->hasVerifiedEmail();
     }
 
+    public function favoriteCombinations()
+    {
+        return $this->belongsToMany(Combination::class, 'combination_favorites', 'user_id', 'combination_id')
+            ->select('id', 'name', 'description', 'combinations.user_id', 'ulid', 'tag_line', 'alcohol', 'amargor', 'food', 'tips', 'img_url', 'combinations.created_at');
+    }
+
     /**
      * Get the attributes that should be cast.
      *

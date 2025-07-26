@@ -1,7 +1,10 @@
 <?php
+
 namespace App\Services\Favorite;
 
 use App\Models\CombinationFavorite;
+use App\Models\User;
+use Illuminate\Database\Eloquent\Collection;
 
 final class FavoriteService
 {
@@ -19,5 +22,10 @@ final class FavoriteService
         $this->combinationFavorite->where('user_id', $user)
             ->where('combination_id', $idCombination)
             ->delete();
+    }
+
+    public function getUserFavorites(int $idUser): Collection
+    {
+        return User::find($idUser)->favoriteCombinations()->with(['user:id,name'])->get();
     }
 }
